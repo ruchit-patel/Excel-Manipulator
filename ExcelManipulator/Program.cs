@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using OfficeOpenXml;
@@ -33,15 +34,17 @@ namespace ExcelManipulator
                     {
                         string name = firstsheet.Cells["C" + i].Text;
                         string address = firstsheet.Cells["E" + i].Text;
+                        string phonenumber = firstsheet.Cells["G" + i].Text;
                         if(column<=3)
                         {
-                            workSheet.Cells[row, column].Value = name + " \n " + address;
-                            workSheet.Row(row).Height = 50;
+                            workSheet.Cells[row, column].Value = name + " \n " + address+" \n Phone:"+ phonenumber;
+                            workSheet.Row(row).CustomHeight=true;
                             workSheet.Column(column).Width = 60;
                             workSheet.Column(column).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
                             workSheet.Column(column).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
                             workSheet.Column(column).Style.WrapText = true;
                             workSheet.Column(column).Style.Font.Bold = true;
+                            workSheet.Column(column).Style.Font.Size =Convert.ToSingle(14);
                             workSheet.Column(row).AutoFit();
                             column++;
                         }
@@ -50,13 +53,14 @@ namespace ExcelManipulator
                             row++;
                             column = 1;
 
-                            workSheet.Cells[row, column].Value = name + " , " + address;
-                            workSheet.Row(row).Height = 50;
+                            workSheet.Cells[row, column].Value = name + " \n " + address+ " \n Phone:" + phonenumber;
+                            workSheet.Row(row).CustomHeight = true;
                             workSheet.Column(column).Width = 60;
                             workSheet.Column(column).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
                             workSheet.Column(column).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
                             workSheet.Column(column).Style.WrapText = true;
                             workSheet.Column(column).Style.Font.Bold = true;
+                            workSheet.Column(column).Style.Font.Size = Convert.ToSingle(14);
                             workSheet.Column(row).AutoFit();
                             column++;
                         }
